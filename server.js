@@ -12,16 +12,20 @@ app.post("/api/shorten", (req, res) => {
   }
   const shortCode = Math.random().toString(36).substring(2, 8);
   urlDatabase[shortCode] = longUrl;
-  console.log(urlDatabase);
   res.status(201).json({
+    success: true,
     message: "URL shortened successfully",
     url: `http://localhost:${PORT}/${shortCode}`,
   });
 });
 
 app.get("/:shortCode", (req, res) => {
-  console.log("ShortCode endpoint was hit!");
-  res.status(200).json({ status: "OK", message: "Route is wired up" });
+  const shortCode = req.params.shortCode;
+  if (!urlDatabase[shortCode]) {
+    return res.status(404).json({ message: "shortCode not found" });
+  }
+  const longUrl = urlDatabase[shortCode];
+  res.redirect(longUrl);
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
