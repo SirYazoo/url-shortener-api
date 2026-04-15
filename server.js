@@ -1,4 +1,10 @@
-const express = require("express");
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv/config";
+import express from "express";
+import { PrismaClient } from "./generated/prisma/client.ts";
+const connectionString = `${process.env.DATABASE_URL}`;
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
 const app = express();
 const PORT = 3000;
 
@@ -47,4 +53,4 @@ app.get("/:shortCode", async (req, res) => {
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
-module.exports = app;
+export default app;
