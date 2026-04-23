@@ -12,11 +12,30 @@ app.use(express.json());
 
 app.post("/api/shorten", async (req, res, next) => {
   try {
-    const longUrl = req.body.longUrl;
+    const { longUrl, customCode } = req.body;
     if (!longUrl) {
       return res.status(400).json({ message: "longUrl is required" });
     }
-    const shortCode = Math.random().toString(36).substring(2, 8);
+    let shortCode;
+    if (customCode) {
+      const sanitizedCode = customCode
+        .trim()
+        .toLowerCase()
+        .replaceAll(/\s+/g, "-");
+      const existingUrl = await prisma.url.findUnique({
+        where: { shortCode: sanitizedCode },
+      });
+
+      if (existingUrl) {
+        return res
+          .status(400)
+          .json({ message: "Custom alias is already in use" });
+      }
+
+      shortCode = sanitizedCode;
+    } else {
+      shortCode = Math.random().toString(36).substring(2, 8);
+    }
     await prisma.url.create({
       data: {
         shortCode: shortCode,
