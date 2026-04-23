@@ -54,7 +54,7 @@ app.post("/api/shorten", shortenLimiter, async (req, res, next) => {
 
       if (existingUrl) {
         return res
-          .status(400)
+          .status(409)
           .json({ message: "Custom alias is already in use" });
       }
 
