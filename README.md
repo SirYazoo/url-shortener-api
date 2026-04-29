@@ -4,7 +4,7 @@ A blazing-fast, production-ready URL shortening microservice. Built with modern 
 
 ## 🌍 Live API
 
-Base URL: `https://url-shortener-api-eta.vercel.app/`
+Base URL: https://url-shortener-api-eta.vercel.app/ \
 _(Note: As a headless API, visiting the root URL will not show a webpage. Use Thunder Client or Postman to hit the `/api/shorten` endpoint)._
 
 ## ✨ Features
