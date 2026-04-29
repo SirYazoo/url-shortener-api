@@ -96,7 +96,7 @@ Generates a random short code or accepts a sanitized custom alias.
 {
   "success": true,
   "message": "URL shortened successfully",
-  "url": "http://localhost:3000/pg-web"
+  "url": "<BASE_URL>/pg-web"
 }
 ```
 

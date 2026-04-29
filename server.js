@@ -9,6 +9,7 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 const app = express();
 const PORT = 3000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
 const shortenLimiter = rateLimit({
@@ -73,7 +74,7 @@ app.post("/api/shorten", shortenLimiter, async (req, res, next) => {
     res.status(201).json({
       success: true,
       message: "URL shortened successfully",
-      url: `http://localhost:${PORT}/${shortCode}`,
+      url: `${BASE_URL}/${shortCode}`,
     });
   } catch (error) {
     next(error);
