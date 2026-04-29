@@ -19,6 +19,9 @@
     "url": "https://github.com/SirYazoo/url-shortener-api/issues"
   },
   "homepage": "https://github.com/SirYazoo/url-shortener-api#readme",
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.7.0",

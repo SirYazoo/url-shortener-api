@@ -2,6 +2,11 @@
 
 A blazing-fast, production-ready URL shortening microservice. Built with modern Node.js (ESM architecture), Express, and PostgreSQL, this API provides secure link generation, custom aliasing, and atomic click tracking.
 
+## 🌍 Live API
+
+Base URL: `https://url-shortener-api-eta.vercel.app/`
+_(Note: As a headless API, visiting the root URL will not show a webpage. Use Thunder Client or Postman to hit the `/api/shorten` endpoint)._
+
 ## ✨ Features
 
 - **Modern Architecture:** Native ECMAScript Modules (ESM) running on Node.js v24+.
