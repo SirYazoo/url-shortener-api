@@ -11,6 +11,8 @@ const app = express();
 const PORT = 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
+// Trust the first proxy (Vercel) so rate limiting uses the correct user IP
+app.set("trust proxy", 1);
 app.use(express.json());
 const shortenLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -28,6 +30,14 @@ const isValidUrl = (urlString) => {
   const url = new URL(urlString);
   return url.protocol === "http:" || url.protocol === "https:";
 };
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "URL Shortener API is running. Hit /api/shorten to create a link.",
+    version: "1.0.0",
+  });
+});
 
 app.post("/api/shorten", shortenLimiter, async (req, res, next) => {
   try {
